@@ -7,7 +7,7 @@ Run demo
 npm run demo
 ```
 
-![fire](https://raw.githubusercontent.com/YaroslavGaponov/terminfire/master/example/fire.gif "terminfire")
+![fire](https://raw.githubusercontent.com/YaroslavGaponov/termonfire/master/example/fire.gif "terminfire")
 
 
 Example
