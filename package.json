@@ -1,0 +1,23 @@
+{
+  "name": "termonfire",
+  "version": "0.0.1",
+  "description": "Terminal on Fire",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "node ./example/fire.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/YaroslavGaponov/termonfire.git"
+  },
+  "keywords": [
+    "fire"
+  ],
+  "author": "Yaroslav Gaponov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YaroslavGaponov/termonfire/issues"
+  },
+  "homepage": "https://github.com/YaroslavGaponov/termonfire#readme"
+}
