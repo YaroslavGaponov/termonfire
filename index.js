@@ -1,4 +1,6 @@
-const PALETTE = [232, 233, 234, 52, 52, 52, 1, 88, 124, 130, 130, 166, 166, 166, 166, 166, 166, 166, 166, 172, 172, 172, 172, 172, 172, 142, 142, 142, 142, 142, 142, 142, 143, 185, 187, 230, 231];
+// Yaroslav Gaponov 
+
+const PALETTE = [231, 230, 187, 185, 143, 142, 172, 166, 130, 124, 88, 1, 52, 234, 233, 232];
 
 const HEIGHT = process.stdout.rows;
 const WIDTH = process.stdout.columns;
@@ -15,7 +17,7 @@ function draw() {
         for (let width = 0; width < SCREEN[height].length; width++) {
             const n = Math.round(Math.random() * 2);
             const w = width - n + 1;
-            SCREEN[height][w] = SCREEN[height - 1][width] + (n >>> 1);
+            SCREEN[height][w] = SCREEN[height - 1][width] + (n & 1);
         }
     }
 
@@ -29,17 +31,14 @@ function draw() {
 }
 
 class Fire {
-
-    constructor(interval = 100) {
+    constructor(interval = 50) {
         this._interval = interval;
         this._id = null;
     }
-
     start() {
         this._id = setInterval(draw, this._interval);
         return this;
     }
-
     stop() {
         if (this._id) {
             clearInterval(this._id);
@@ -47,7 +46,6 @@ class Fire {
         }
         return this;
     }
-
     inc(n = 1) {
         for (let width = 0; width < SCREEN[0].length; width++) {
             if (SCREEN[0][width] < n) SCREEN[0][width] = 0;
@@ -55,7 +53,6 @@ class Fire {
         }
         return this;
     }
-
     dec(n = 1) {
         for (let width = 0; width < SCREEN[0].length; width++) {
             SCREEN[0][width] += n;
