@@ -5,6 +5,13 @@ const PALETTE = [231, 230, 187, 185, 143, 142, 172, 166, 130, 124, 88, 1, 52, 23
 const HEIGHT = process.stdout.rows;
 const WIDTH = process.stdout.columns;
 
+const START = '\x1b[s\x1b[2J';
+const STOP = '\x1b[2J\x1b[u';
+const GOTOXY = (x, y) => `\x1b[${HEIGHT - x + 1};${y + 1}H`;
+const SETCOLOR = (color) => color = `\x1b[48;5;${color}m`;
+const PRINT = (x, y, color, s) => GOTOXY(x, y) + SETCOLOR(color) + s;
+const CURSOR = flag => flag ? '\x1b[?25h' : '\x1b[?25l';
+
 const SCREEN = new Array(HEIGHT);
 for (let height = 0; height < SCREEN.length; height++) {
     SCREEN[height] = new Array(WIDTH);
@@ -21,13 +28,16 @@ function draw() {
         }
     }
 
+    const buffer = [];
+    buffer.push(CURSOR(false));
     for (let i = 0; i < SCREEN.length; i++) {
         for (let j = 0; j < SCREEN[i].length; j++) {
             const color = PALETTE[SCREEN[i][j]] || PALETTE[PALETTE.length - 1];
-            process.stdout.write('\x1b[' + (HEIGHT - i) + ';' + j + 'H');
-            process.stdout.write('\x1b[48;5;' + color + 'm' + ' ');
+            buffer.push(PRINT(i, j, color, ' '));
         }
     }
+    buffer.push(CURSOR(true));
+    process.stdout.write(buffer.join(''));
 }
 
 class Fire {
@@ -36,13 +46,17 @@ class Fire {
         this._id = null;
     }
     start() {
-        this._id = setInterval(draw, this._interval);
+        if (!this._id) {
+            process.stdout.write(START);
+            this._id = setInterval(draw, this._interval);
+        }
         return this;
     }
     stop() {
         if (this._id) {
             clearInterval(this._id);
             this._id = null;
+            process.stdout.write(STOP);
         }
         return this;
     }
