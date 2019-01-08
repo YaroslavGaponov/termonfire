@@ -23,7 +23,7 @@ function draw() {
 
     for (let i = 0; i < SCREEN.length; i++) {
         for (let j = 0; j < SCREEN[i].length; j++) {
-            const color = PALETTE[SCREEN[i][j]] || 0;
+            const color = PALETTE[SCREEN[i][j]] || PALETTE[PALETTE.length - 1];
             process.stdout.write('\x1b[' + (HEIGHT - i) + ';' + j + 'H');
             process.stdout.write('\x1b[48;5;' + color + 'm' + ' ');
         }

@@ -1,5 +1,7 @@
 Terminal on Fire
 ===========================
+Just draw fire in terminal
+
 
 
 Run demo
