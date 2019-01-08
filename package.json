@@ -12,7 +12,9 @@
     "url": "git+ssh://git@github.com/YaroslavGaponov/termonfire.git"
   },
   "keywords": [
-    "fire"
+    "fire",
+    "fun",
+    "doom"
   ],
   "author": "Yaroslav Gaponov",
   "license": "MIT",
